@@ -1,9 +1,12 @@
 {
   "packages": [
+    "sample-api/npm",
     "sample-domain/npm",
+    "sample-infrastructure/npm",
     "sample-infrastructure-persistence-orm/npm",
     "sample-infrastructure-services-domain/npm",
-    "sample-services/npm"
+    "sample-services/npm",
+    "sample-tools-orm-migrations/npm"
   ],
   "version": "0.1.0"
 }

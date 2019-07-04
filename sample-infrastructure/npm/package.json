@@ -1,0 +1,29 @@
+{
+  "name": "sample-infrastructure",
+  "version": "0.1.0",
+  "description": "Sample Infrastructure",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "gulp",
+    "prepare": "npm run build",
+    "start": "echo \"Error: no start specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "NaJ64 <njudice@gmail.com> (https://github.com/NaJ64)",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "sample-domain": "^0.1.0",
+    "sample-infrastructure-persistence-orm": "^0.1.0",
+    "sample-infrastructure-services-domain": "^0.1.0",
+    "sample-services": "^0.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^5.0.1",
+    "merge2": "^1.2.3",
+    "tslib": "^1.10.0",
+    "typescript": "^3.5.2"
+  }
+}

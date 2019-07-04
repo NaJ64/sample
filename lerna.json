@@ -1,0 +1,9 @@
+{
+  "packages": [
+    "sample-domain/npm",
+    "sample-infrastructure-persistence-orm/npm",
+    "sample-infrastructure-services-domain/npm",
+    "sample-services/npm"
+  ],
+  "version": "0.1.0"
+}

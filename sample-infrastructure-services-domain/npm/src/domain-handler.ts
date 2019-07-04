@@ -1,0 +1,37 @@
+import { ISampleUnitOfWork, ISampleUnitOfWorkFactory } from "sample-domain";
+import { ICommandHandler } from "sample-services";
+
+export abstract class DomainHandlerBase<TCommand, TResult=void> implements ICommandHandler<TCommand, TResult> {
+
+    protected readonly _uowFactory: ISampleUnitOfWorkFactory;
+
+    constructor(uowFactory: ISampleUnitOfWorkFactory) {
+        this._uowFactory = uowFactory;
+    }
+
+    abstract readonly commandType: string;
+
+    protected abstract onHandleAsync(uow: ISampleUnitOfWork, command: TCommand): Promise<TResult>;
+
+    async handleAsync(command: TCommand): Promise<TResult> {
+        let uow: ISampleUnitOfWork | null = null;
+        let transactionId = "";
+        let result: TResult;
+        try {
+            uow = this._uowFactory.create();
+            transactionId = await uow.beginAsync();
+            result = await this.onHandleAsync(uow, command);
+            await uow.commitAsync();
+            uow.dispose();
+            return result;
+        }
+        catch (e) {
+            if (uow) {
+                transactionId && await uow.rollbackAsync();
+                uow.dispose();
+            }
+            throw e;
+        }
+    }
+
+}

@@ -1,7 +1,7 @@
 import { ISampleUnitOfWork, ISampleUnitOfWorkFactory } from "sample-domain";
-import { ICommandHandler } from "sample-services";
+import { ICommand, ICommandHandler } from "sample-services";
 
-export abstract class DomainHandlerBase<TCommand, TResult=void> implements ICommandHandler<TCommand, TResult> {
+export abstract class DomainHandlerBase<TCommand extends ICommand, TResult=void> implements ICommandHandler<TCommand, TResult> {
 
     protected readonly _uowFactory: ISampleUnitOfWorkFactory;
 

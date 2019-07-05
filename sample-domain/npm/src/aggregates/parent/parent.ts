@@ -6,7 +6,7 @@ export class Parent extends AggregateBase {
     children: Child[];
     constructor(description: string) {
         super();
-        this.description = "";
+        this.description = description || "";
         this.children = [];
     }
     addChild(description: string) {

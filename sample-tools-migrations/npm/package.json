@@ -1,5 +1,5 @@
 {
-  "name": "sample-tools-orm-migrations",
+  "name": "sample-tools-migrations",
   "version": "0.1.0",
   "description": "Sample ORM Migrations (Tools)",
   "main": "dist/index.js",

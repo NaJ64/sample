@@ -17,8 +17,8 @@ export class DomainUpdateSomethingHandler extends DomainHandlerBase<UpdateSometh
         }
         parent.addChild(command.someNewData);
         parent.description = command.someNewData;
-        await uow.parents.updateAsync(command.someId, parent);
-        return parent.id;
+        var updated = await uow.parents.updateAsync(command.someId, parent);
+        return updated.id;
     }
 
 }

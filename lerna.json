@@ -6,7 +6,7 @@
     "sample-infrastructure-persistence-orm/npm",
     "sample-infrastructure-services-domain/npm",
     "sample-services/npm",
-    "sample-tools-orm-migrations/npm"
+    "sample-tools-migrations/npm"
   ],
   "version": "0.1.0"
 }

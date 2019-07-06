@@ -10,4 +10,4 @@ export class RemoveSomethingCommand implements ICommand {
     }
 }
 
-export interface IRemoveSomethingHandler extends CommandHandlerBase<RemoveSomethingCommand> { }
+export interface IRemoveSomethingHandler extends CommandHandlerBase<RemoveSomethingCommand, number> { }

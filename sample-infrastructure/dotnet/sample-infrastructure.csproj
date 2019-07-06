@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\sample-domain\dotnet\sample-domain.csproj" />
+    <ProjectReference Include="..\..\sample-infrastructure-persistence-orm\dotnet\sample-infrastructure-persistence-orm.csproj" />
+    <ProjectReference Include="..\..\sample-infrastructure-services-domain\dotnet\sample-infrastructure-services-domain.csproj" />
+    <ProjectReference Include="..\..\sample-services\dotnet\sample-services.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Sample.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+</Project>

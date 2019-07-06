@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\sample-infrastructure-persistence-orm\dotnet\sample-infrastructure-persistence-orm.csproj" />
+    <ProjectReference Include="..\..\sample-domain\dotnet\sample-domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Sample.Tools.Migrations</RootNamespace>
+  </PropertyGroup>
+
+</Project>

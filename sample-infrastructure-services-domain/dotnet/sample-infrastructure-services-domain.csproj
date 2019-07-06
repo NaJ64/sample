@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\sample-domain\dotnet\sample-domain.csproj" />
+    <ProjectReference Include="..\..\sample-services\dotnet\sample-services.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Sample.Infrastructure.Services.Domain</RootNamespace>
+  </PropertyGroup>
+
+</Project>

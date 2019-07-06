@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample-domain", "sample-dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-domain", "sample-domain\dotnet\sample-domain.csproj", "{0CA3FB3A-3A7C-414A-A000-600AF99DF095}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample-services", "sample-services", "{5CD1CB9C-7B26-419E-8BD3-D0AE23D3A420}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-services", "sample-services\dotnet\sample-services.csproj", "{5831BE2A-57D8-4687-81F5-D2A29862B8F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{0CA3FB3A-3A7C-414A-A000-600AF99DF095}.Release|x64.Build.0 = Release|Any CPU
 		{0CA3FB3A-3A7C-414A-A000-600AF99DF095}.Release|x86.ActiveCfg = Release|Any CPU
 		{0CA3FB3A-3A7C-414A-A000-600AF99DF095}.Release|x86.Build.0 = Release|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Debug|x64.Build.0 = Debug|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Release|x64.ActiveCfg = Release|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Release|x64.Build.0 = Release|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0CA3FB3A-3A7C-414A-A000-600AF99DF095} = {285D3356-62C8-4C51-8EC2-EA984216484B}
+		{5831BE2A-57D8-4687-81F5-D2A29862B8F7} = {5CD1CB9C-7B26-419E-8BD3-D0AE23D3A420}
 	EndGlobalSection
 EndGlobal

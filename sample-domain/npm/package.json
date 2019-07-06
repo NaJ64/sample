@@ -13,9 +13,14 @@
   "author": "NaJ64 <njudice@gmail.com> (https://github.com/NaJ64)",
   "license": "UNLICENSED",
   "private": true,
+  "peerDependencies": {
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13"
+  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
+    "inversify": "^5.0.1",
     "merge2": "^1.2.3",
     "tslib": "^1.10.0",
     "typescript": "^3.5.2"

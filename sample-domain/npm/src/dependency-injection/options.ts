@@ -1,3 +1,2 @@
-export interface IOptions {
-    
-}
+export interface IOptions { }
+export class Options implements IOptions { }

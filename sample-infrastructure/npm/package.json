@@ -16,13 +16,20 @@
   "dependencies": {
     "sample-domain": "^0.1.0",
     "sample-infrastructure-persistence-orm": "^0.1.0",
-    "sample-infrastructure-services-domain": "^0.1.0",
+    "sample-infrastructure-services-domain": "^0.1.0"
+  },
+  "peerDependencies": {
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13",
     "sample-services": "^0.1.0"
   },
   "devDependencies": {
+    "@types/node": "^12.0.12",
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
+    "inversify": "^5.0.1",
     "merge2": "^1.2.3",
+    "sample-services": "^0.1.0",
     "tslib": "^1.10.0",
     "typescript": "^3.5.2"
   }

@@ -1,5 +1,5 @@
 import { IParentRepository, ISampleUnitOfWork, ISampleUnitOfWorkFactory } from "sample-domain";
-import { Connection } from "typeorm";
+import { Connection, ConnectionOptions } from "typeorm";
 import { UnitOfWorkBase, UnitOfWorkFactoryBase } from "../abstractions/unit-of-work";
 import { ParentRepository, ParentSchema } from "./parent";
 
@@ -15,6 +15,10 @@ export class SampleUnitOfWork extends UnitOfWorkBase implements ISampleUnitOfWor
 }
 
 export class SampleUnitOfWorkFactory extends UnitOfWorkFactoryBase<SampleUnitOfWork> implements ISampleUnitOfWorkFactory {
+
+    constructor(connectionOptions: ConnectionOptions) {
+        super(connectionOptions);
+    }
 
     protected createInstance(getConnection: () => Connection): SampleUnitOfWork {
         return new SampleUnitOfWork(getConnection);

@@ -1,5 +1,8 @@
 {
   "packages": [
+    "cert-loader",
+    "config-loader",
+    "expressify",
     "sample-api/npm",
     "sample-domain/npm",
     "sample-infrastructure/npm",

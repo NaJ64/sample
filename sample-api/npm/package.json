@@ -14,18 +14,18 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "express": "^4.17.1",
+    "expressify": "^0.1.0",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13",
     "sample-infrastructure": "^0.1.0",
     "sample-services": "^0.1.0"
   },
-  "peerDependencies": {
-    "inversify": "^5.0.1",
-    "reflect-metadata": "^0.1.13"
-  },
   "devDependencies": {
+    "@types/express": "^4.17.0",
     "@types/node": "^12.0.12",
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
-    "inversify": "^5.0.1",
     "merge2": "^1.2.3",
     "tslib": "^1.10.0",
     "typescript": "^3.5.2"

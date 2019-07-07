@@ -1,11 +1,13 @@
-import { ISampleUnitOfWork, ISampleUnitOfWorkFactory, Parent } from "sample-domain";
+import { inject, injectable } from "inversify";
+import { ISampleUnitOfWork, ISampleUnitOfWorkFactory, Parent, TYPES as Domain } from "sample-domain";
 import { IQueries, ISomethingDto } from "sample-services";
 
+@injectable()
 export class DomainQueries implements IQueries {
 
     private readonly _uowFactory: ISampleUnitOfWorkFactory;
 
-    constructor(uowFactory: ISampleUnitOfWorkFactory) {
+    constructor(@inject(Domain.Aggregates.ISampleUnitOfWorkFactory) uowFactory: ISampleUnitOfWorkFactory) {
         this._uowFactory = uowFactory;
     }
 

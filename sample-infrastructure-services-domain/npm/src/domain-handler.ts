@@ -1,6 +1,8 @@
+import { injectable } from "inversify";
 import { ISampleUnitOfWork, ISampleUnitOfWorkFactory } from "sample-domain";
 import { ICommand, ICommandHandler } from "sample-services";
 
+@injectable()
 export abstract class DomainHandlerBase<TCommand extends ICommand, TResult=void> implements ICommandHandler<TCommand, TResult> {
 
     protected readonly _uowFactory: ISampleUnitOfWorkFactory;

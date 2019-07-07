@@ -1,3 +1,4 @@
+import { injectable } from "inversify";
 import { IEntity, IUnitOfWork, IUnitOfWorkFactory } from "sample-domain";
 import { Connection, ConnectionManager, ConnectionOptions, EntitySchema, getConnectionManager, QueryRunner, Repository } from "typeorm";
 
@@ -93,6 +94,7 @@ export abstract class UnitOfWorkBase implements IUnitOfWork {
 
 }
 
+@injectable()
 export abstract class UnitOfWorkFactoryBase<TUnitOfWork extends IUnitOfWork> implements IUnitOfWorkFactory<TUnitOfWork> {
 
     private readonly _connectionOptions: ConnectionOptions;

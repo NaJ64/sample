@@ -14,6 +14,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "pg": "^7.11.0",
     "sample-domain": "^0.1.0",
     "typeorm": "^0.2.18"
   },

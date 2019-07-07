@@ -1,12 +1,14 @@
-import { ISampleUnitOfWork, ISampleUnitOfWorkFactory, Parent } from "sample-domain";
+import { inject, injectable } from "inversify";
+import { ISampleUnitOfWork, ISampleUnitOfWorkFactory, Parent, TYPES as Domain } from "sample-domain";
 import { AddSomethingCommand, IAddSomethingHandler } from "sample-services";
 import { DomainHandlerBase } from "../domain-handler";
 
+@injectable()
 export class DomainAddSomethingHandler extends DomainHandlerBase<AddSomethingCommand, number> implements IAddSomethingHandler {
 
     readonly commandType = AddSomethingCommand.TYPE;
 
-    constructor(uowFactory: ISampleUnitOfWorkFactory) {
+    constructor(@inject(Domain.Aggregates.ISampleUnitOfWorkFactory) uowFactory: ISampleUnitOfWorkFactory) {
         super(uowFactory);
     }
 

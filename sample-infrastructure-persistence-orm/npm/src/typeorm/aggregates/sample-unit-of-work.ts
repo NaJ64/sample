@@ -2,6 +2,8 @@ import { IParentRepository, ISampleUnitOfWork, ISampleUnitOfWorkFactory } from "
 import { Connection, ConnectionOptions } from "typeorm";
 import { UnitOfWorkBase, UnitOfWorkFactoryBase } from "../abstractions/unit-of-work";
 import { ParentRepository, ParentSchema } from "./parent";
+import { injectable, inject } from "inversify";
+import { TYPES as OrmPersistence } from "../../dependency-injection/types";
 
 export class SampleUnitOfWork extends UnitOfWorkBase implements ISampleUnitOfWork {
 
@@ -9,14 +11,15 @@ export class SampleUnitOfWork extends UnitOfWorkBase implements ISampleUnitOfWor
 
     constructor(getConnection: () => Connection) {
         super(getConnection);
-        this.parents = new ParentRepository(this.getRepositoryForSchema(ParentSchema));
+        this.parents = new ParentRepository(() => this.getRepositoryForSchema(ParentSchema));
     }
 
 }
 
+@injectable()
 export class SampleUnitOfWorkFactory extends UnitOfWorkFactoryBase<SampleUnitOfWork> implements ISampleUnitOfWorkFactory {
 
-    constructor(connectionOptions: ConnectionOptions) {
+    constructor(@inject(OrmPersistence.TypeORM.ConnectionOptions) connectionOptions: ConnectionOptions) {
         super(connectionOptions);
     }
 

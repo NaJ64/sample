@@ -25,12 +25,12 @@ export class SampleOrmPersistenceModule extends ContainerModule {
                 throw new Error("PostgreSQL connection options must be provided");
             }
 
-            //ConnectionOptions
+            // ConnectionOptions
             const postgresConnectionOptions = SampleOrmPersistenceModule.createPostgresConnectionOptions(options.postgres);
             bind<ConnectionOptions>(SampleOrmPersistence.TypeORM.ConnectionOptions)
                 .toConstantValue(postgresConnectionOptions);
 
-            //IAddSomethingHandler
+            // ISampleUnitOfWorkFactory
             bind<ISampleUnitOfWorkFactory>(SampleDomain.Aggregates.ISampleUnitOfWorkFactory)
                 .to(SampleUnitOfWorkFactory)
                 .inSingletonScope();

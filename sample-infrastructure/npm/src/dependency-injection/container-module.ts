@@ -18,20 +18,16 @@ export class SampleInfrastructureModule extends ContainerModule {
             configureOptions && configureOptions(options);
 
             if (options.domainCommands || options.domainQueries) {
-
                 SampleDomainServicesModule.createBind(domainServices => {
-                    domainServices.enableCommands = true;
-                    domainServices.enableQueries = true;
+                    domainServices.enableCommands = !!options.domainCommands;
+                    domainServices.enableQueries = !!options.domainQueries;
                 })(bind);
-
             }
 
-            if (options.postgresConnection) {
-
+            if (options.postgres) {
                 SampleOrmPersistenceModule.createBind(ormPersistence => {
-                    ormPersistence.postgres = options.postgresConnection;
+                    ormPersistence.postgres = options.postgres;
                 })(bind);
-
             }
 
         };

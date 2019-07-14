@@ -5,7 +5,7 @@ using Sample.Services.Commands;
 
 namespace Sample.Infrastructure.Services.Domain.Commands
 {
-    public class AddSomethingHandler : DomainHandlerBase<AddSomethingCommand, int>, IAddSomethingCommandHandler
+    public class DomainAddSomethingHandler : DomainHandlerBase<AddSomethingCommand, int>, IAddSomethingHandler
     {
         public override string CommandType => AddSomethingCommand.TYPE;
 

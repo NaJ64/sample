@@ -18,7 +18,7 @@ export class Startup {
         services.load(new SampleApiModule(options => {
             options.domainCommands = true;
             options.domainQueries = true;
-            options.postgresConnection = postgresConnection;
+            options.postgres = postgresConnection;
         }));
     }
 

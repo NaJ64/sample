@@ -13,5 +13,5 @@ namespace Sample.Services.Commands
         }
     }
 
-    public interface IRemoveSomethingCommandHandler : ICommandHandler<RemoveSomethingCommand, int> { }
+    public interface IRemoveSomethingHandler : ICommandHandler<RemoveSomethingCommand, int> { }
 }

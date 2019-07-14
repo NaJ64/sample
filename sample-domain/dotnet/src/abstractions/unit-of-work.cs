@@ -10,7 +10,7 @@ namespace Sample.Domain.Abstractions
         Task RollbackAsync();
     }
 
-    public interface IUnitOfWorkFactory<TUnitOfWork> where TUnitOfWork : IUnitOfWork
+    public interface IUnitOfWorkFactory<out TUnitOfWork> where TUnitOfWork : IUnitOfWork
     {
         TUnitOfWork Create();
     }

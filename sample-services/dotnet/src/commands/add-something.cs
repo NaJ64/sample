@@ -13,5 +13,5 @@ namespace Sample.Services.Commands
         }
     }
 
-    public interface IAddSomethingCommandHandler : ICommandHandler<AddSomethingCommand, int> { }
+    public interface IAddSomethingHandler : ICommandHandler<AddSomethingCommand, int> { }
 }

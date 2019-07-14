@@ -5,7 +5,7 @@ using Sample.Services.Commands;
 
 namespace Sample.Infrastructure.Services.Domain.Commands
 {
-    public class RemoveSomethingHandler : DomainHandlerBase<RemoveSomethingCommand, int>, IRemoveSomethingCommandHandler
+    public class DomainRemoveSomethingHandler : DomainHandlerBase<RemoveSomethingCommand, int>, IRemoveSomethingHandler
     {
         public override string CommandType => RemoveSomethingCommand.TYPE;
 

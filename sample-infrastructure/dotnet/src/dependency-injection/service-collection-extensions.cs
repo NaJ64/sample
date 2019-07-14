@@ -21,7 +21,7 @@ namespace Sample.Infrastructure.DependencyInjection
                 });
             }
 
-            if (!options.Postgres.HasValue) 
+            if (options.Postgres.HasValue) 
             {
                 services.AddSampleOrmPersistence(ormPersistence => 
                 {

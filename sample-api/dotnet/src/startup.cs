@@ -23,7 +23,8 @@ namespace Sample.API
             var postgres = new PostgresConnection();
             _configuration.Bind("postgres", new PostgresConnection());
 
-            services.AddSampleApi(options => {
+            services.AddSampleApi(options => 
+            {
                 options.DomainCommands = true;
                 options.DomainQueries = true;
                 options.Postgres = postgres;
@@ -49,7 +50,7 @@ namespace Sample.API
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Encountered error: {0}", e);
+                    Console.WriteLine("Encountered error: {0}", JsonConvert.SerializeObject(e));
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(e));
                 }
             });

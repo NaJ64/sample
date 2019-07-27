@@ -3,9 +3,10 @@ import { ISampleUnitOfWorkFactory, TYPES as SampleDomain } from "sample-domain";
 import { ConnectionOptions } from "typeorm";
 import { ChildSchema } from "../typeorm/aggregates/parent/child-schema";
 import { ParentSchema } from "../typeorm/aggregates/parent/parent-schema";
-import { SampleUnitOfWorkFactory } from "../typeorm/aggregates/sample-unit-of-work";
-import { IOptions, IPostgresConnection, Options } from "./options";
+import { TOSampleUnitOfWorkFactory } from "../typeorm/aggregates/sample-unit-of-work";
+import { IOptions, Options } from "./options";
 import { TYPES as SampleOrmPersistence } from "./types";
+import { IPostgresConnection } from "../postgres-connection";
 
 type ConfigureOptions = (configureOptions: IOptions) => void;
 
@@ -32,7 +33,7 @@ export class SampleOrmPersistenceModule extends ContainerModule {
 
             // ISampleUnitOfWorkFactory
             bind<ISampleUnitOfWorkFactory>(SampleDomain.Aggregates.ISampleUnitOfWorkFactory)
-                .to(SampleUnitOfWorkFactory)
+                .to(TOSampleUnitOfWorkFactory)
                 .inSingletonScope();
 
         };

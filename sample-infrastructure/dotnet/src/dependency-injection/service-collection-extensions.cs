@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Sample.Infrastructure.Persistence.ORM;
 using Sample.Infrastructure.Persistence.ORM.DependencyInjection;
 using Sample.Infrastructure.Services.Domain.DependencyInjection;
 
@@ -21,11 +22,12 @@ namespace Sample.Infrastructure.DependencyInjection
                 });
             }
 
-            if (options.Postgres.HasValue) 
+            if (options.Postgres != null) 
             {
                 services.AddSampleOrmPersistence(ormPersistence => 
                 {
                     ormPersistence.Postgres = options.Postgres;
+                    ormPersistence.ORM = options.ORM ?? OrmType.NHibernate;
                 });
             }
 

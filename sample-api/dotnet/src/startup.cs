@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Sample.API.DependencyInjection;
-using Sample.Infrastructure.Persistence.ORM.DependencyInjection;
+using Sample.Infrastructure.Persistence.ORM;
 using Sample.Services.Queries;
 
 namespace Sample.API
@@ -21,12 +21,13 @@ namespace Sample.API
         public void ConfigureServices(IServiceCollection services)
         {
             var postgres = new PostgresConnection();
-            _configuration.Bind("postgres", new PostgresConnection());
+            _configuration.Bind("Postgres", postgres);
 
             services.AddSampleApi(options => 
             {
                 options.DomainCommands = true;
                 options.DomainQueries = true;
+                options.ORM = OrmType.NHibernate;
                 options.Postgres = postgres;
             });
         }

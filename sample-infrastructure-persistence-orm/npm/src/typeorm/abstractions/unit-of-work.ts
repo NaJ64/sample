@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import { IEntity, IUnitOfWork, IUnitOfWorkFactory } from "sample-domain";
 import { Connection, ConnectionManager, ConnectionOptions, EntitySchema, getConnectionManager, QueryRunner, Repository } from "typeorm";
 
-export abstract class UnitOfWorkBase implements IUnitOfWork {
+export abstract class TOUnitOfWorkBase implements IUnitOfWork {
 
     private readonly _getConnection: () => Connection;
     private _queryRunner: QueryRunner | null;
@@ -58,7 +58,7 @@ export abstract class UnitOfWorkBase implements IUnitOfWork {
         this.verifyTransactionClosed();
         await this.connectQueryRunnerAsync();
         await (<QueryRunner>this._queryRunner).startTransaction();
-        this._transactionId = UnitOfWorkBase.getTransactionId();
+        this._transactionId = TOUnitOfWorkBase.getTransactionId();
         return Promise.resolve(this._transactionId);
     }    
 
@@ -95,7 +95,7 @@ export abstract class UnitOfWorkBase implements IUnitOfWork {
 }
 
 @injectable()
-export abstract class UnitOfWorkFactoryBase<TUnitOfWork extends IUnitOfWork> implements IUnitOfWorkFactory<TUnitOfWork> {
+export abstract class TOUnitOfWorkFactoryBase<TUnitOfWork extends IUnitOfWork> implements IUnitOfWorkFactory<TUnitOfWork> {
 
     private readonly _connectionOptions: ConnectionOptions;
     private readonly _connectionManager: ConnectionManager;

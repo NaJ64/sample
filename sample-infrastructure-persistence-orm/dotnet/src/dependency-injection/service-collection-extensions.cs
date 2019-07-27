@@ -12,11 +12,18 @@ namespace Sample.Infrastructure.Persistence.ORM.DependencyInjection
             var options = new Options();
             configureOptions?.Invoke(options);
 
-            if (!options.Postgres.HasValue)
-                throw new ArgumentNullException("PostgreSQL connections options must be provided");
+            if (options.Postgres == null)
+                throw new ArgumentNullException(nameof(options.Postgres), "PostgreSQL connections options must be provided");
+            if (options.ORM.Equals(default(OrmType)))
+                throw new ArgumentNullException(nameof(options.ORM), "ORM specification must be provided");
 
             // ISampleUnitOfWorkFactory
-            services.AddSingleton<ISampleUnitOfWorkFactory, SampleUnitOfWorkFactory>();
+            if (options.ORM == OrmType.NHibernate)
+                services.AddSingleton<ISampleUnitOfWorkFactory, NHSampleUnitOfWorkFactory>(sp => 
+                    new NHSampleUnitOfWorkFactory(options.Postgres));
+            if (options.ORM == OrmType.EFCore)
+                services.AddSingleton<ISampleUnitOfWorkFactory, EFSampleUnitOfWorkFactory>(sp =>
+                    new EFSampleUnitOfWorkFactory(options.Postgres));
 
             return services;
         }

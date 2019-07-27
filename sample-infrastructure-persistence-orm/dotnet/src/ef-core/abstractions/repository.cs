@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sample.Domain.Abstractions;
 
-namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
+namespace Sample.Infrastructure.Persistence.ORM.EFCore.Abstractions
 {
-    public abstract class NHRepositoryBase<TAggregate> : IRepository<TAggregate> where TAggregate : IAggregate
+    public abstract class EFRepositoryBase<TAggregate> : IRepository<TAggregate> where TAggregate : IAggregate
     {
         public Task DeleteAsync(int id) => throw new System.NotImplementedException();
 

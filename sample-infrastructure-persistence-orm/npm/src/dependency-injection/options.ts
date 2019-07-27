@@ -1,10 +1,4 @@
-export interface IPostgresConnection {
-    host: string,
-    port: number,
-    username: string,
-    password: string,
-    database: string
-}
+import { IPostgresConnection } from "../postgres-connection";
 
 export interface IOptions { 
     postgres?: IPostgresConnection;

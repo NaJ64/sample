@@ -2,25 +2,24 @@ using NHibernate;
 using NHibernate.Mapping.ByCode;
 using Sample.Domain.Aggregates;
 using Sample.Domain.Aggregates.Parent;
-using Sample.Infrastructure.Persistence.ORM.DependencyInjection;
 using Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions;
 using Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates.Parent;
 
 namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates
 {
-    public class SampleUnitOfWork : UnitOfWorkBase, ISampleUnitOfWork
+    public class NHSampleUnitOfWork : NHUnitOfWorkBase, ISampleUnitOfWork
     {
         public IParentRepository Parents { get; private set; }
 
-        public SampleUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory) 
+        public NHSampleUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory) 
         { 
-            Parents = new ParentRepository(); 
+            Parents = new NHParentRepository(); 
         }
     }
 
-    public class SampleUnitOfWorkFactory : UnitOfWorkFactoryBase<ISampleUnitOfWork>, ISampleUnitOfWorkFactory 
+    public class NHSampleUnitOfWorkFactory : NHUnitOfWorkFactoryBase<ISampleUnitOfWork>, ISampleUnitOfWorkFactory 
     { 
-        public SampleUnitOfWorkFactory(IOptions options) : base(options) { }
+        public NHSampleUnitOfWorkFactory(PostgresConnection postgres) : base(postgres) { }
 
         protected override void OnEntityMapping(ModelMapper mapper)
         {
@@ -29,6 +28,6 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates
         }
 
         protected override ISampleUnitOfWork CreateInstance(ISessionFactory sessionFactory) => 
-            new SampleUnitOfWork(sessionFactory);
+            new NHSampleUnitOfWork(sessionFactory);
     }
 }

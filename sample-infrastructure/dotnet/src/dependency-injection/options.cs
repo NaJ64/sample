@@ -1,5 +1,5 @@
 using System;
-using Sample.Infrastructure.Persistence.ORM.DependencyInjection;
+using Sample.Infrastructure.Persistence.ORM;
 
 namespace Sample.Infrastructure.DependencyInjection
 {
@@ -7,13 +7,15 @@ namespace Sample.Infrastructure.DependencyInjection
     { 
         bool DomainQueries { get; set; }
         bool DomainCommands { get; set; }
-        Nullable<PostgresConnection> Postgres { get; set; }
+        PostgresConnection Postgres { get; set; }
+        Nullable<OrmType> ORM { get; set; }
     }
     
     public class Options : IOptions
     { 
         public bool DomainQueries { get; set; } = true;
         public bool DomainCommands { get; set; } = true;
-        public Nullable<PostgresConnection> Postgres { get; set; }
+        public PostgresConnection Postgres { get; set; }
+        public Nullable<OrmType> ORM { get; set; }
     }
 }

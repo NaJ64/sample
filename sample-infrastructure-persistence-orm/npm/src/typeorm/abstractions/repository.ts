@@ -1,7 +1,7 @@
 import { IEntity, IRepository } from "sample-domain";
 import { Repository } from "typeorm";
 
-export abstract class RepositoryBase<TEntity extends IEntity<TKey>, TKey=number> implements IRepository<TEntity, TKey> {
+export abstract class TORepositoryBase<TEntity extends IEntity<TKey>, TKey=number> implements IRepository<TEntity, TKey> {
 
     protected readonly _getRepository: () => Repository<TEntity>;
 

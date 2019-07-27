@@ -1,8 +1,8 @@
 import { IParentRepository, Parent } from "sample-domain";
 import { Repository } from "typeorm";
-import { RepositoryBase } from "../../abstractions/repository";
+import { TORepositoryBase } from "../../abstractions/repository";
 
-export class ParentRepository extends RepositoryBase<Parent> implements IParentRepository {
+export class TOParentRepository extends TORepositoryBase<Parent> implements IParentRepository {
 
     constructor(getRepository: () => Repository<Parent>) {
         super(getRepository);

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Sample.Infrastructure.DependencyInjection;
+using Sample.Infrastructure.Persistence.ORM;
 using Sample.Services.DependencyInjection;
 
 namespace Sample.API.DependencyInjection
@@ -18,7 +19,8 @@ namespace Sample.API.DependencyInjection
             {
                 infrastruture.DomainCommands = options.DomainCommands;
                 infrastruture.DomainQueries = options.DomainQueries;
-                infrastruture.Postgres = options.Postgres.GetValueOrDefault();
+                infrastruture.ORM = OrmType.NHibernate;
+                infrastruture.Postgres = options.Postgres;
             });
             
             return services;

@@ -5,16 +5,15 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
 using Sample.Domain.Abstractions;
-using Sample.Infrastructure.Persistence.ORM.DependencyInjection;
 
 namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
 {
-    public abstract class UnitOfWorkBase : IUnitOfWork
+    public abstract class NHUnitOfWorkBase : IUnitOfWork
     {
 
         private readonly ISessionFactory _sessionFactory;
 
-        public UnitOfWorkBase(ISessionFactory sessionFactory) => _sessionFactory = sessionFactory;
+        public NHUnitOfWorkBase(ISessionFactory sessionFactory) => _sessionFactory = sessionFactory;
 
         public void Dispose() { }
 
@@ -25,25 +24,28 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
         public Task RollbackAsync() => throw new System.NotImplementedException();
     }
 
-    public abstract class UnitOfWorkFactoryBase<TUnitOfWork> : IUnitOfWorkFactory<TUnitOfWork> where TUnitOfWork : IUnitOfWork
+    public abstract class NHUnitOfWorkFactoryBase<TUnitOfWork> : IUnitOfWorkFactory<TUnitOfWork> where TUnitOfWork : IUnitOfWork
     {
         private readonly ISessionFactory _sessionFactory;
+        private readonly Configuration _nhConfiguration;
 
-        public UnitOfWorkFactoryBase(IOptions options)
+        public Configuration NHConfiguration => _nhConfiguration;
+
+        public NHUnitOfWorkFactoryBase(PostgresConnection postgres)
         {
             // Entity mapping
             var mapper = new ModelMapper();
             OnEntityMapping(mapper);
             var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
             // Session factory
-            var configuration = new Configuration().DataBaseIntegration(db => 
+            _nhConfiguration = new Configuration().DataBaseIntegration(db => 
             {
-                db.ConnectionString = BuildConnectionString(options.Postgres.GetValueOrDefault());
+                db.ConnectionString = BuildConnectionString(postgres);
                 db.Dialect<PostgreSQLDialect>();
                 db.Driver<NpgsqlDriver>();
             });
-            configuration.AddMapping(mapping);
-			_sessionFactory = configuration.BuildSessionFactory();
+            _nhConfiguration.AddMapping(mapping);
+			_sessionFactory = _nhConfiguration.BuildSessionFactory();
         }
 
         protected virtual void OnEntityMapping(ModelMapper mapper) { }

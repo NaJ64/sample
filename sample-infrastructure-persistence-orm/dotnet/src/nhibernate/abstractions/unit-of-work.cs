@@ -40,7 +40,7 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
             // Session factory
             _nhConfiguration = new Configuration().DataBaseIntegration(db => 
             {
-                db.ConnectionString = BuildConnectionString(postgres);
+                db.ConnectionString = postgres?.ToConnectionString();
                 db.Dialect<PostgreSQLDialect>();
                 db.Driver<NpgsqlDriver>();
             });
@@ -49,9 +49,6 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
         }
 
         protected virtual void OnEntityMapping(ModelMapper mapper) { }
-
-        private string BuildConnectionString(PostgresConnection postgres)  => 
-             $"Server=${postgres.Host};database=${postgres.Database};user id=${postgres.Username};password=${postgres.Password}";
 
         public TUnitOfWork Create() => CreateInstance(_sessionFactory);
 

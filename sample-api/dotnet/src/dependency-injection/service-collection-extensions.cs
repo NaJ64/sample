@@ -15,12 +15,12 @@ namespace Sample.API.DependencyInjection
 
             services.AddSampleServices();
 
-            services.AddSampleInfrastructure(infrastruture =>
+            services.AddSampleInfrastructure(infrastructure =>
             {
-                infrastruture.DomainCommands = options.DomainCommands;
-                infrastruture.DomainQueries = options.DomainQueries;
-                infrastruture.ORM = OrmType.NHibernate;
-                infrastruture.Postgres = options.Postgres;
+                infrastructure.DomainCommands = options.DomainCommands;
+                infrastructure.DomainQueries = options.DomainQueries;
+                infrastructure.ORM = OrmType.NHibernate;
+                infrastructure.Postgres = options.Postgres;
             });
             
             return services;

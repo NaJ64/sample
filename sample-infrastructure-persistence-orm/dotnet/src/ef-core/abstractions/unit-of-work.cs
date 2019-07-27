@@ -1,23 +1,43 @@
+using System;
 using System.Threading.Tasks;
 using Sample.Domain.Abstractions;
 
 namespace Sample.Infrastructure.Persistence.ORM.EFCore.Abstractions
 {
-    public abstract class EFUnitOfWorkBase : IUnitOfWork
+    public abstract class EFUnitOfWorkBase<TDbContext> : IUnitOfWork 
+        where TDbContext : IDbContext
     {
+        protected readonly TDbContext _dbContext;
+        public EFUnitOfWorkBase(TDbContext dbContext) => _dbContext = dbContext;
+
         public void Dispose() { }
 
-        public Task<string> BeginAsync() => throw new System.NotImplementedException();
+        public async Task<string> BeginAsync() 
+        {
+            var transaction = await _dbContext.BeginTransactionAsync();
+            return transaction.TransactionId.ToString();
+        }
 
-        public Task CommitAsync() => throw new System.NotImplementedException();
+        public Task CommitAsync()
+        {
+            _dbContext.CommitTransaction();
+            return Task.CompletedTask;
+        }
 
-        public Task RollbackAsync() => throw new System.NotImplementedException();
+        public Task RollbackAsync()
+        {
+            _dbContext.RollbackTransaction();
+            return Task.CompletedTask;
+        }
     }
 
-    public abstract class EFUnitOfWorkFactoryBase<TUnitOfWork> : IUnitOfWorkFactory<TUnitOfWork> where TUnitOfWork : IUnitOfWork
-    {        
-        public EFUnitOfWorkFactoryBase(PostgresConnection postgres) { }
-
-        public TUnitOfWork Create() => throw new System.NotImplementedException();
+    public abstract class EFUnitOfWorkFactoryBase<TUnitOfWork, TDbContext> : IUnitOfWorkFactory<TUnitOfWork>
+        where TUnitOfWork : IUnitOfWork
+        where TDbContext : IDbContext 
+    {
+        private readonly Func<TDbContext> _getDbContext;
+        public EFUnitOfWorkFactoryBase(Func<TDbContext> getDbContext) => _getDbContext = getDbContext;
+        public TUnitOfWork Create() => CreateInstance(_getDbContext());
+        protected abstract TUnitOfWork CreateInstance(TDbContext dbContext);
     }
 }

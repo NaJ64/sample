@@ -12,6 +12,8 @@ namespace Sample.Infrastructure.Services.Domain
 
         public abstract string CommandType { get; }
 
+        public DomainHandlerBase(ISampleUnitOfWorkFactory uowFactory) => _uowFactory = uowFactory;
+
         protected abstract Task<TResult> OnHandleAsync(ISampleUnitOfWork uow, TCommand command);
 
         public async Task<TResult> HandleAsync(TCommand command)

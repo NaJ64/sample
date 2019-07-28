@@ -6,7 +6,7 @@ namespace Sample.Domain.Aggregates.Parent
     public class Parent : AggregateBase, IAggregate
     {
         public virtual string Description { get; set; }
-        public virtual IList<Child> Children { get; set; }
+        public virtual IList<Child> Children { get; set; } = new List<Child>();
         private Parent() { }
         public Parent(string description) 
         {

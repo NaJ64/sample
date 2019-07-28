@@ -7,6 +7,8 @@ namespace Sample.Infrastructure.Services.Domain.Commands
 {
     public class DomainAddSomethingHandler : DomainHandlerBase<AddSomethingCommand, int>, IAddSomethingHandler
     {
+        public DomainAddSomethingHandler(ISampleUnitOfWorkFactory uowFactory) : base(uowFactory) { }
+        
         public override string CommandType => AddSomethingCommand.TYPE;
 
         protected override async Task<int> OnHandleAsync(ISampleUnitOfWork uow, AddSomethingCommand command) 

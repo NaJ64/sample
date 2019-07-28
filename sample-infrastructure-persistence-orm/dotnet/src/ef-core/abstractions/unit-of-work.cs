@@ -8,25 +8,35 @@ namespace Sample.Infrastructure.Persistence.ORM.EFCore.Abstractions
         where TDbContext : IDbContext
     {
         protected readonly TDbContext _dbContext;
+        private Guid? _transactionId;
         public EFUnitOfWorkBase(TDbContext dbContext) => _dbContext = dbContext;
 
         public void Dispose() { }
 
         public async Task<string> BeginAsync() 
         {
+            if (_transactionId.HasValue)
+                throw new InvalidOperationException("A transaction has already begun");
             var transaction = await _dbContext.BeginTransactionAsync();
-            return transaction.TransactionId.ToString();
+            _transactionId = transaction.TransactionId;
+            return _transactionId.ToString();
         }
 
-        public Task CommitAsync()
+        public async Task CommitAsync()
         {
+            if (!_transactionId.HasValue)
+                throw new InvalidOperationException("No transaction to commit");
+            await _dbContext.SaveTrackedAsync();
             _dbContext.CommitTransaction();
-            return Task.CompletedTask;
+            _transactionId = null;
         }
 
         public Task RollbackAsync()
         {
+            if (!_transactionId.HasValue) 
+                throw new InvalidOperationException("No transaction to rollback");
             _dbContext.RollbackTransaction();
+            _transactionId = null;
             return Task.CompletedTask;
         }
     }

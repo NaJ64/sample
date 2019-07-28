@@ -21,13 +21,14 @@ namespace Sample.API
         public void ConfigureServices(IServiceCollection services)
         {
             var postgres = new PostgresConnection();
-            _configuration.Bind("Postgres", postgres);
+            _configuration.Bind("postgres", postgres);
+            var ormType = OrmType.FromName(_configuration.GetValue<string>("orm"));
 
             services.AddSampleApi(options => 
             {
                 options.DomainCommands = true;
                 options.DomainQueries = true;
-                options.ORM = OrmType.NHibernate;
+                options.ORM = ormType;
                 options.Postgres = postgres;
             });
         }

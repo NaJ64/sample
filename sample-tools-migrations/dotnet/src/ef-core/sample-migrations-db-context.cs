@@ -23,10 +23,10 @@ namespace Sample.Tools.Migrations.EFCore
         private static readonly PostgresConnection POSTGRES_CONNECTION = new PostgresConnection()
         {
             Host = "localhost",
-            Port = 3306,
-            Database = "test",
-            Username = "test",
-            Password = "test"
+            Port = 5432,
+            Username = "sample",
+            Password = "P0stgr3s",
+            Database = "sample-dotnet-ef"
         };
 
         public SampleMigrationsDbContext CreateDbContext(string[] args) =>

@@ -19,7 +19,7 @@ namespace Sample.API.DependencyInjection
             {
                 infrastructure.DomainCommands = options.DomainCommands;
                 infrastructure.DomainQueries = options.DomainQueries;
-                infrastructure.ORM = OrmType.NHibernate;
+                infrastructure.ORM = options.ORM;
                 infrastructure.Postgres = options.Postgres;
             });
             

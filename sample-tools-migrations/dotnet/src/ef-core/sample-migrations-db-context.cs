@@ -20,7 +20,7 @@ namespace Sample.Tools.Migrations.EFCore
 
     public class SampleMigrationsDbContextFactory : IDesignTimeDbContextFactory<SampleMigrationsDbContext>
     {
-        private static readonly PostgresConnection POSTGRES_CONNECTION = new PostgresConnection()
+        public static readonly PostgresConnection POSTGRES_CONNECTION = new PostgresConnection()
         {
             Host = "localhost",
             Port = 5432,

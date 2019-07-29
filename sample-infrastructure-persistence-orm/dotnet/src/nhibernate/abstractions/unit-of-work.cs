@@ -17,7 +17,12 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
 
         public NHUnitOfWorkBase(ISession session) => _session = session;
 
-        public void Dispose() { }
+        public void Dispose() 
+        { 
+            if (_transactionId.HasValue) 
+                _session.Transaction.Rollback();
+            _transactionId = null;
+        }
 
         public Task<string> BeginAsync()
         {

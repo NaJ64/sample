@@ -11,7 +11,12 @@ namespace Sample.Infrastructure.Persistence.ORM.EFCore.Abstractions
         private Guid? _transactionId;
         public EFUnitOfWorkBase(TDbContext dbContext) => _dbContext = dbContext;
 
-        public void Dispose() { }
+        public void Dispose() 
+        { 
+            if (_transactionId.HasValue)
+                _dbContext.RollbackTransaction();
+            _transactionId = null;
+        }
 
         public async Task<string> BeginAsync() 
         {

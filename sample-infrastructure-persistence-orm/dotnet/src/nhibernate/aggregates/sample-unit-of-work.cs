@@ -13,9 +13,9 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates
         
         public IParentRepository Parents { get; private set; }
 
-        public NHSampleUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory) 
+        public NHSampleUnitOfWork(ISession session) : base(session) 
         { 
-            Parents = new NHParentRepository(); 
+            Parents = new NHParentRepository(session); 
         }
     }
 
@@ -29,7 +29,6 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates
             mapper.AddMapping<ChildSchema>();
         }
 
-        protected override ISampleUnitOfWork CreateInstance(ISessionFactory sessionFactory) => 
-            new NHSampleUnitOfWork(sessionFactory);
+        protected override ISampleUnitOfWork CreateInstance(ISession session) => new NHSampleUnitOfWork(session);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Cfg;
@@ -11,17 +12,37 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
     public abstract class NHUnitOfWorkBase : IUnitOfWork
     {
 
-        private readonly ISessionFactory _sessionFactory;
+        private readonly ISession _session;
+        private Guid? _transactionId;
 
-        public NHUnitOfWorkBase(ISessionFactory sessionFactory) => _sessionFactory = sessionFactory;
+        public NHUnitOfWorkBase(ISession session) => _session = session;
 
         public void Dispose() { }
 
-        public Task<string> BeginAsync() => throw new System.NotImplementedException();
+        public Task<string> BeginAsync()
+        {
+            if (_transactionId.HasValue)
+                throw new InvalidOperationException("A transaction has already begun");
+            _session.Transaction.Begin();
+            _transactionId = Guid.NewGuid();
+            return Task.FromResult(_transactionId.ToString());
+        }
 
-        public Task CommitAsync() => throw new System.NotImplementedException();
+        public async Task CommitAsync()
+        {
+            if (!_transactionId.HasValue)
+                throw new InvalidOperationException("No transaction to commit");
+            await _session.Transaction.CommitAsync();
+            _transactionId = null;
+        }
 
-        public Task RollbackAsync() => throw new System.NotImplementedException();
+        public async Task RollbackAsync()
+        {
+            if (!_transactionId.HasValue)
+                throw new InvalidOperationException("No transaction to rollback");
+            await _session.Transaction.RollbackAsync();
+            _transactionId = null;
+        }
     }
 
     public abstract class NHUnitOfWorkFactoryBase<TUnitOfWork> : IUnitOfWorkFactory<TUnitOfWork> where TUnitOfWork : IUnitOfWork
@@ -50,8 +71,8 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Abstractions
 
         protected virtual void OnEntityMapping(ModelMapper mapper) { }
 
-        public TUnitOfWork Create() => CreateInstance(_sessionFactory);
+        public TUnitOfWork Create() => CreateInstance(_sessionFactory.OpenSession());
 
-        protected abstract TUnitOfWork CreateInstance(ISessionFactory sessionFactory);
+        protected abstract TUnitOfWork CreateInstance(ISession session);
     }
 }

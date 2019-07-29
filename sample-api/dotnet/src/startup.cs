@@ -84,8 +84,14 @@ namespace Sample.API
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Encountered error: {0}", JsonConvert.SerializeObject(e));
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(e));
+                    Console.WriteLine("Encountered error: {0}\n\n{1}", 
+                        JsonConvert.SerializeObject(e.Message), 
+                        JsonConvert.SerializeObject(e.StackTrace)
+                    );
+                    await context.Response.WriteAsync(string.Format("{0}\n\n{1}", 
+                        JsonConvert.SerializeObject(e.Message), 
+                        JsonConvert.SerializeObject(e.StackTrace)
+                    ));
                 }
             });
         }

@@ -8,10 +8,14 @@ namespace Sample.Infrastructure.Persistence.ORM.EFCore.Aggregates.Parent
     {
         public void Configure(EntityTypeBuilder<ParentAggregate.Child> builder)
         {
-            builder.ToTable("Child", SampleDbContext.DEFAULT_SCHEMA)
+            builder.ToTable(nameof(ParentAggregate.Child).ToLowerInvariant(), SampleDbContext.DEFAULT_SCHEMA)
                 .HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Description).IsRequired();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd()
+                .HasColumnName(nameof(ParentAggregate.Child.Id).ToLower());
+            builder.Property(x => x.Description).IsRequired()
+                .HasColumnName(nameof(ParentAggregate.Child.Description).ToLower());
+            builder.Property(x => x.ParentId)
+                .HasColumnName(nameof(ParentAggregate.Child.ParentId).ToLower());
             builder.HasOne<ParentAggregate.Parent>()
                 .WithMany(x => x.Children)
                 .HasForeignKey(x => x.ParentId)

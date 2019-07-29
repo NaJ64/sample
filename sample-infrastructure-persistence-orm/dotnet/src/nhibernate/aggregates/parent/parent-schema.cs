@@ -8,19 +8,20 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates.Parent
     { 
         public ParentSchema()
         {
-            Lazy(false);
-			Id(x => x.Id, map => map.Generator(Generators.Native));
-			Property(x => x.Id);
-			Property(x => x.Description);
-            Set(x => x.Children, map => 
-            {
-                map.Lazy(CollectionLazy.NoLazy);
-                map.Key(k =>
-                {
-                    k.Column(nameof(ParentAggregate.Child.ParentId));
-                    k.NotNullable(true);
-                });
-            });
+            Schema(NHSampleUnitOfWork.DEFAULT_SCHEMA);
+            Table(nameof(ParentAggregate.Parent).ToLowerInvariant());
+			Lazy(false);
+            Id(p => p.Id, map => map.Generator(Generators.Increment));
+            Property(p => p.Description);
+            Set(
+                p => p.Children, 
+                c => {
+                    c.Lazy(CollectionLazy.NoLazy);
+                    c.Key(k => k.Column(nameof(ParentAggregate.Child.ParentId).ToLowerInvariant()));
+                    c.Cascade(Cascade.All);
+                }, 
+                map => map.OneToMany(p => p.Class(typeof(ParentAggregate.Child)))
+            );
         }
     }
 }

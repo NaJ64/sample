@@ -8,60 +8,60 @@ namespace Sample.Tools.Migrations.src.efcore.migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Sample");
+                name: "sample");
 
             migrationBuilder.CreateTable(
-                name: "Parent",
-                schema: "Sample",
+                name: "parent",
+                schema: "sample",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Description = table.Column<string>(nullable: false)
+                    description = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Parent", x => x.Id);
+                    table.PrimaryKey("PK_parent", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Child",
-                schema: "Sample",
+                name: "child",
+                schema: "sample",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ParentId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    parentid = table.Column<int>(nullable: false),
+                    description = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Child", x => x.Id);
+                    table.PrimaryKey("PK_child", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Child_Parent_ParentId",
-                        column: x => x.ParentId,
-                        principalSchema: "Sample",
-                        principalTable: "Parent",
-                        principalColumn: "Id",
+                        name: "FK_child_parent_parentid",
+                        column: x => x.parentid,
+                        principalSchema: "sample",
+                        principalTable: "parent",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Child_ParentId",
-                schema: "Sample",
-                table: "Child",
-                column: "ParentId");
+                name: "IX_child_parentid",
+                schema: "sample",
+                table: "child",
+                column: "parentid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Child",
-                schema: "Sample");
+                name: "child",
+                schema: "sample");
 
             migrationBuilder.DropTable(
-                name: "Parent",
-                schema: "Sample");
+                name: "parent",
+                schema: "sample");
         }
     }
 }

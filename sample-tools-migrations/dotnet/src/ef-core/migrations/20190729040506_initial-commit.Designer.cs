@@ -9,7 +9,7 @@ using Sample.Tools.Migrations.EFCore;
 namespace Sample.Tools.Migrations.src.efcore.migrations
 {
     [DbContext(typeof(SampleMigrationsDbContext))]
-    [Migration("20190728181559_initial-commit")]
+    [Migration("20190729040506_initial-commit")]
     partial class initialcommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,31 +23,36 @@ namespace Sample.Tools.Migrations.src.efcore.migrations
             modelBuilder.Entity("Sample.Domain.Aggregates.Parent.Child", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnName("description");
 
-                    b.Property<int>("ParentId");
+                    b.Property<int>("ParentId")
+                        .HasColumnName("parentid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Child","Sample");
+                    b.ToTable("child","sample");
                 });
 
             modelBuilder.Entity("Sample.Domain.Aggregates.Parent.Parent", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnName("description");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Parent","Sample");
+                    b.ToTable("parent","sample");
                 });
 
             modelBuilder.Entity("Sample.Domain.Aggregates.Parent.Child", b =>

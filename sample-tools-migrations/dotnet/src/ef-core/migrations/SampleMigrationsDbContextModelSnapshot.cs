@@ -21,31 +21,36 @@ namespace Sample.Tools.Migrations.src.efcore.migrations
             modelBuilder.Entity("Sample.Domain.Aggregates.Parent.Child", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnName("description");
 
-                    b.Property<int>("ParentId");
+                    b.Property<int>("ParentId")
+                        .HasColumnName("parentid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Child","Sample");
+                    b.ToTable("child","sample");
                 });
 
             modelBuilder.Entity("Sample.Domain.Aggregates.Parent.Parent", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnName("description");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Parent","Sample");
+                    b.ToTable("parent","sample");
                 });
 
             modelBuilder.Entity("Sample.Domain.Aggregates.Parent.Child", b =>

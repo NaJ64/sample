@@ -8,11 +8,12 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates.Parent
     { 
         public ChildSchema()
         {
+            Schema(NHSampleUnitOfWork.DEFAULT_SCHEMA);
+            Table(nameof(ParentAggregate.Child).ToLowerInvariant());
 			Lazy(false);
-			Id(x => x.Id, map => map.Generator(Generators.Native));
-			Property(x => x.Id);
-            Property(x => x.ParentId);
-			Property(x => x.Description);
+			Id(c => c.Id, map => map.Generator(Generators.Increment));
+			Property(c => c.Description);
+            Property(c => c.ParentId);
         }
     }
 }

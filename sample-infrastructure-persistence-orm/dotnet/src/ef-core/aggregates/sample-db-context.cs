@@ -16,7 +16,7 @@ namespace Sample.Infrastructure.Persistence.ORM.EFCore.Aggregates
         public DbSet<ParentAggregate.Parent> Parent { get; private set; }
         public DbSet<ParentAggregate.Child> Child { get; private set; }
         public SampleDbContext(PostgresConnection postgres) : base(postgres) { }
-        public static string DEFAULT_SCHEMA => "Sample";
+        public static string DEFAULT_SCHEMA => "sample";
         protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder
             .ApplyConfiguration(new ParentSchema())
             .ApplyConfiguration(new ChildSchema());

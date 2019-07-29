@@ -9,6 +9,8 @@ namespace Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates
 {
     public class NHSampleUnitOfWork : NHUnitOfWorkBase, ISampleUnitOfWork
     {
+        public static string DEFAULT_SCHEMA => "sample";
+        
         public IParentRepository Parents { get; private set; }
 
         public NHSampleUnitOfWork(ISessionFactory sessionFactory) : base(sessionFactory) 

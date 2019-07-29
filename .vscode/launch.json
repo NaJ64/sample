@@ -4,26 +4,42 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    {
-        "name": ".NET Core Launch (sample-api)",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "build",
-        "program": "${workspaceFolder}/sample-api/dotnet/bin/Debug/netcoreapp2.2/sample-api.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/sample-api/dotnet",
-        "stopAtEntry": false,
-        "serverReadyAction": {
-            "action": "openExternally",
-            "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+        {
+            "name": ".NET Core Launch (sample-api)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/sample-api/dotnet/bin/Debug/netcoreapp2.2/sample-api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/sample-api/dotnet",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
         },
-        "env": {
-            "ASPNETCORE_ENVIRONMENT": "Development"
+        {
+            "name": ".NET Core Launch (sample-tools-migrations)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/sample-tools-migrations/dotnet/bin/Debug/netcoreapp2.2/sample-tools-migrations.dll",
+            "args": [
+                "nh",
+                "update"
+            ],
+            "cwd": "${workspaceFolder}/sample-tools-migrations/dotnet",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         },
-        "sourceFileMap": {
-            "/Views": "${workspaceFolder}/Views"
-        }
-    },
         {
             "name": "Node.js Launch (sample-api)",
             "type": "node",

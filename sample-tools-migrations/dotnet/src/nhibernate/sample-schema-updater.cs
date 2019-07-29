@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Sample.Infrastructure.Persistence.ORM;
 using Sample.Infrastructure.Persistence.ORM.NHibernate.Aggregates;

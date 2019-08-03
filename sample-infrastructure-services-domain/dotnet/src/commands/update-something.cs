@@ -11,7 +11,7 @@ namespace Sample.Infrastructure.Services.Domain.Commands
         
         public override string CommandType => UpdateSomethingCommand.TYPE;
 
-        protected override async Task<int> OnHandleAsync(ISampleUnitOfWork uow, UpdateSomethingCommand command) 
+        public override async Task<int> OnHandleAsync(ISampleUnitOfWork uow, UpdateSomethingCommand command) 
         {
             var parent = await uow.Parents.GetAsync(command.SomeId);
             if (parent == null)

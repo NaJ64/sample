@@ -11,7 +11,7 @@ namespace Sample.Infrastructure.Services.Domain.Commands
         
         public override string CommandType => RemoveSomethingCommand.TYPE;
 
-        protected override async Task<int> OnHandleAsync(ISampleUnitOfWork uow, RemoveSomethingCommand command) 
+        public override async Task<int> OnHandleAsync(ISampleUnitOfWork uow, RemoveSomethingCommand command) 
         {
             var parent = await uow.Parents.GetAsync(command.SomeId);
             if (parent == null)

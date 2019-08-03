@@ -12,7 +12,7 @@ export class DomainAddSomethingHandler extends DomainHandlerBase<AddSomethingCom
         super(uowFactory);
     }
 
-    protected async onHandleAsync(uow: ISampleUnitOfWork, command: AddSomethingCommand): Promise<number> {
+    async onHandleAsync(uow: ISampleUnitOfWork, command: AddSomethingCommand): Promise<number> {
         const newRecord = new Parent(command.someNewData);
         newRecord.addChild(newRecord.description);
         var inserted = await uow.parents.insertAsync(newRecord);

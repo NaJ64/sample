@@ -11,7 +11,7 @@ namespace Sample.Infrastructure.Services.Domain.Commands
         
         public override string CommandType => AddSomethingCommand.TYPE;
 
-        protected override async Task<int> OnHandleAsync(ISampleUnitOfWork uow, AddSomethingCommand command) 
+        public override async Task<int> OnHandleAsync(ISampleUnitOfWork uow, AddSomethingCommand command) 
         {
             var newRecord = new Parent(command.SomeNewData);
             newRecord.AddChild(newRecord.Description);

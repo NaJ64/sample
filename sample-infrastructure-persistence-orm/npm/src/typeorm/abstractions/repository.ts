@@ -26,6 +26,9 @@ export abstract class TORepositoryBase<TEntity extends IEntity<TKey>, TKey=numbe
             });
             return result;
         }
+        if (skipOrId == null) {
+            return await this._getRepository().find();
+        }
         return await this._getRepository().findOne(<TKey>skipOrId) || null;
     }
 

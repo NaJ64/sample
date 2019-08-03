@@ -76,16 +76,22 @@ export abstract class TOUnitOfWorkBase implements IUnitOfWork {
 
     dispose(): void {
         new Promise(resolve => {
-            if (!this._queryRunner) {
+            if (!this._queryRunner || !this.transactionIsOpen()) {
                 resolve();
                 return;
             }
-            if (this.transactionIsOpen()) {
-                this._queryRunner.rollbackTransaction()
-                    .then(() => (<QueryRunner>this._queryRunner).release())
-                    .then(() => resolve());
+            this._queryRunner.rollbackTransaction()
+                .finally(() => resolve());
+        }).then(() => {
+            if (this._queryRunner && this._queryRunner.connection.isConnected) {
+                return this._queryRunner.connection.close();
             }
-            resolve();
+            return;
+        }).then(() => {
+            if (this._queryRunner && !this._queryRunner.isReleased) {
+                return this._queryRunner.release();
+            }
+            return;
         }).then(() => {
             this._queryRunner = null;
             this._transactionId = null;

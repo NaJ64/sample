@@ -4,7 +4,6 @@ import { EntityBaseSchemaColumns } from "../../abstractions/entity-schema";
 
 export const ParentSchema = new EntitySchema<Parent>({
     name: "parent",
-    target: Parent,
     columns: {
         ...EntityBaseSchemaColumns,
         description: {

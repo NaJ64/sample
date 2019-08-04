@@ -16,7 +16,8 @@
   "dependencies": {
     "config-loader": "^0.1.0",
     "sample-domain": "^0.1.0",
-    "sample-infrastructure-persistence-orm": "^0.1.0"
+    "sample-infrastructure-persistence-orm": "^0.1.0",
+    "typeorm": "^0.2.18"
   },
   "devDependencies": {
     "@types/node": "^12.0.12",

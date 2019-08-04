@@ -52,7 +52,7 @@ namespace Sample.Tools.Migrations
                     WriteLineCyan("Encountered error:  Unrecognized NHibernate argument(s)");
                     return;
                 }
-                WriteLineCyan($"Updating database '{SampleSchemaUpdater.POSTGRES_CONNECTION.Database}...'\n");
+                WriteLineCyan($"Updating database '{SampleSchemaUpdater.POSTGRES_CONNECTION.Database}'...\n");
                 new SampleSchemaUpdater()
                     .UpdateDatabaseAsync()
                     .GetAwaiter()

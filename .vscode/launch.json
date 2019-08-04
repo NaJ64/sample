@@ -47,5 +47,18 @@
             "cwd": "${workspaceFolder}/sample-api/npm",
             "program": "${workspaceFolder}/sample-api/npm/dist/index.js",
         },
+        {
+            "name": "Node.js Launch (sample-tools-migrations)",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/sample-tools-migrations/npm",
+            "program": "${workspaceFolder}/sample-tools-migrations/npm/dist/index.js",
+            "args": [
+                "typeorm",
+                "migration:create",
+                "-n",
+                "InitialCommit"
+            ],
+        },
     ]
 }

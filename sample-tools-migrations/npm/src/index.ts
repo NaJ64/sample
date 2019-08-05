@@ -1,4 +1,4 @@
-import MigrationConnectionOptions from "./typeorm/migration-connection-options";
+import * as MigrationConnectionOptions from "./typeorm/migration-connection-options";
 
 const command = process.argv[2];
 if (!command) {
@@ -11,12 +11,15 @@ if (command != "typeorm") {
 }
 
 // TypeORM
-const hasTypeOrmArgs =  process.argv.length > 2;
-const typeormArgs = hasTypeOrmArgs ? process.argv.slice(3) : [];
-console.log("Using TypeORM connection: ", MigrationConnectionOptions);
-if (hasTypeOrmArgs) {
-    process.argv.splice(2);
+if (command == "typeorm") {
+    const hasTypeOrmArgs =  process.argv.length > 2;
+    const typeormArgs = hasTypeOrmArgs ? process.argv.slice(3) : [];
+    console.log(`Running 'typeorm ${typeormArgs.join(' ')}' using connection: `, MigrationConnectionOptions);
+    if (hasTypeOrmArgs) {
+        process.argv.splice(2);
+    }
+    process.argv.push("-f", "./dist/typeorm/migration-connection-options");
+    process.argv.push(...typeormArgs);
+    import("typeorm/cli");
 }
-process.argv.push("-f", "./dist/typeorm/migration-connection-options.js");
-process.argv.push(...typeormArgs);
-import "typeorm/cli";
+

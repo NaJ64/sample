@@ -53,9 +53,10 @@
             "request": "launch",
             "cwd": "${workspaceFolder}/sample-tools-migrations/npm",
             "program": "${workspaceFolder}/sample-tools-migrations/npm/dist/index.js",
+            "sourceMaps": false,
             "args": [
                 "typeorm",
-                "migration:create",
+                "migration:generate",
                 "-n",
                 "InitialCommit"
             ],

@@ -4,6 +4,6 @@ export const EntityBaseSchemaColumns = {
   id: {
     type: Number,
     primary: true,
-    generated: true,
+    generated: "increment",
   } as EntitySchemaColumnOptions
 };

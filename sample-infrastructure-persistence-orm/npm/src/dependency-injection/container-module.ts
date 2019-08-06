@@ -3,7 +3,7 @@ import { ISampleUnitOfWorkFactory, TYPES as SampleDomain } from "sample-domain";
 import { ConnectionOptions } from "typeorm";
 import { ChildSchema } from "../typeorm/aggregates/parent/child-schema";
 import { ParentSchema } from "../typeorm/aggregates/parent/parent-schema";
-import { TOSampleUnitOfWorkFactory } from "../typeorm/aggregates/sample-unit-of-work";
+import { TOSampleUnitOfWorkFactory, TOSampleUnitOfWork } from "../typeorm/aggregates/sample-unit-of-work";
 import { IOptions, Options } from "./options";
 import { TYPES as SampleOrmPersistence } from "./types";
 import { IPostgresConnection } from "../postgres-connection";
@@ -41,6 +41,7 @@ export class SampleOrmPersistenceModule extends ContainerModule {
 
     public static createPostgresConnectionOptions(postgres: IPostgresConnection): ConnectionOptions {
         return <ConnectionOptions>{
+            ...{ schema: TOSampleUnitOfWork.DEFAULT_SCHEMA },
             ...postgres,
             type: "postgres",
             entities: [

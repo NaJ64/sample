@@ -8,6 +8,8 @@ import { TYPES as OrmPersistence } from "../../dependency-injection/types";
 
 export class TOSampleUnitOfWork extends TOUnitOfWorkBase implements ISampleUnitOfWork {
 
+    static readonly DEFAULT_SCHEMA = "sample";
+
     readonly parents: IParentRepository;
 
     constructor(getConnection: () => Connection) {

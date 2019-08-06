@@ -1,13 +1,13 @@
 const gulp = require("gulp");
 const merge = require("merge2");
 const ts = require("gulp-typescript");
-const tsProject = ts.createProject("tsconfig.json", { "declaration": true });
+const tsProject = ts.createProject("tsconfig.json", { "declaration": false, "composite": false });
 
 gulp.task("compile:ts", () => {
     const tsResult = tsProject.src().pipe(tsProject());
     return merge([
         tsResult.js.pipe(gulp.dest("dist")),
-        tsResult.dts.pipe(gulp.dest("dist"))
+        //tsResult.dts.pipe(gulp.dest("dist"))
     ]);
 });
 

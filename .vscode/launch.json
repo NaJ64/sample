@@ -56,9 +56,10 @@
             "sourceMaps": false,
             "args": [
                 "typeorm",
-                "migration:generate",
-                "-n",
-                "InitialCommit"
+                "migration:run",
+                // "migration:generate",
+                // "-n",
+                // "InitialCommit"
             ],
         },
     ]

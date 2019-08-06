@@ -1,8 +1,8 @@
 import { EntitySchema } from "typeorm";
-import { Child } from "sample-domain";
+import { Child, Parent } from "sample-domain";
 import { EntityBaseSchemaColumns } from "../../abstractions/entity-schema";
 
-export const ChildSchema = new EntitySchema<Child>({
+export const ChildSchema = new EntitySchema<Child & { _parent: Parent }>({
     name: "child",
     columns: {
         ...EntityBaseSchemaColumns,
@@ -11,6 +11,17 @@ export const ChildSchema = new EntitySchema<Child>({
         },
         description: {
             type: String
+        }
+    },
+    relations: {
+        _parent: {
+            type: "many-to-one",
+            target: "parent",
+            joinColumn: {
+                name: "parentId"
+            },
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE"
         }
     }
 });

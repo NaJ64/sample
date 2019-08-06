@@ -13,11 +13,7 @@ export const ParentSchema = new EntitySchema<Parent>({
     relations: {
         children: {
             type: "one-to-many",
-            target: "child",
-            joinColumn: {
-                name: "parentId"
-            },
-            cascade: true
+            target: "child"
         }
     }
 });

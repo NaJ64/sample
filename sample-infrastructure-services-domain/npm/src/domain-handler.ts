@@ -24,13 +24,13 @@ export abstract class DomainHandlerBase<TCommand extends ICommand, TResult=void>
             transactionId = await uow.beginAsync();
             result = await this.onHandleAsync(uow, command);
             await uow.commitAsync();
-            uow.dispose();
+            await uow.disposeAsync();
             return result;
         }
         catch (e) {
             if (uow) {
                 transactionId && await uow.rollbackAsync();
-                uow.dispose();
+                await uow.disposeAsync();
             }
             throw e;
         }

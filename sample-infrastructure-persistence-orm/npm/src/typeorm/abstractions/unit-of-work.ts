@@ -43,7 +43,7 @@ export abstract class TOUnitOfWorkBase implements IUnitOfWork {
 
     private async connectQueryRunnerAsync(): Promise<void> {
         if (!this._queryRunner || !this._queryRunner.connection.isConnected) {
-            this.dispose();
+            await this.disposeAsync();
             const connection = await this._getConnection().connect();
             this._queryRunner = connection.createQueryRunner();
         }
@@ -74,8 +74,8 @@ export abstract class TOUnitOfWorkBase implements IUnitOfWork {
         this._transactionId = null;
     }
 
-    dispose(): void {
-        new Promise(resolve => {
+    async disposeAsync(): Promise<void> {
+        await new Promise(resolve => {
             if (!this._queryRunner || !this.transactionIsOpen()) {
                 resolve();
                 return;

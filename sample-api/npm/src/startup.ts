@@ -1,6 +1,6 @@
 import express from "express";
 import { Container } from "inversify";
-import { IQueries, TYPES as SampleServices } from "sample-services";
+import { IQueries, TYPES as SampleServices, IAddSomethingHandler, IUpdateSomethingHandler, UpdateSomethingCommand, AddSomethingCommand } from "sample-services";
 import { SampleApiModule } from "./dependency-injection/container-module";
 
 export class Startup {
@@ -28,7 +28,28 @@ export class Startup {
             try {
                 
                 const queries = services.get<IQueries>(SampleServices.IQueries);
-                const records = await queries.getSomethingsAsync();
+                let records = await queries.getSomethingsAsync();
+                if (records.length) {
+                    const firstSomething = records[0];
+
+                    const updateSomethingHandler = services.get<IUpdateSomethingHandler>(SampleServices.Commands.IUpdateSomethingHandler);
+                    await updateSomethingHandler.handleAsync(new UpdateSomethingCommand({
+                        someId: firstSomething.someId,
+                        someNewData: firstSomething.someData + ' | ' + new Date().toISOString()
+                    }));
+
+                    // const removeSomethingHandler = services.get<IRemoveSomethingHandler>(SampleServices.Commands.IRemoveSomethingHandler);
+                    // await removeSomethingHandler.handleAsync(new RemoveSomethingCommand({
+                    //     someId: firstSomething.someId
+                    // }));
+                } else {
+                    const addSomethingHandler = services.get<IAddSomethingHandler>(SampleServices.Commands.IAddSomethingHandler);
+                    await addSomethingHandler.handleAsync(new AddSomethingCommand({
+                        someNewData: new Date().toISOString()
+                    }));
+                }
+
+                records = await queries.getSomethingsAsync();
                 res.send(JSON.stringify(records));
                 
             } catch(e) {

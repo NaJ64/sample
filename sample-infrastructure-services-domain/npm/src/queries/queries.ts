@@ -30,7 +30,7 @@ export class DomainQueries implements IQueries {
         finally {
             if (uow) {
                 transactionId && await uow.rollbackAsync();
-                uow.dispose();
+                await uow.disposeAsync();
             }
         }
         return results;

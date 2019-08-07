@@ -1,6 +1,6 @@
-import { IDisposable } from "./disposable";
+import { IAsyncDisposable } from "./disposable";
 
-export interface IUnitOfWork extends IDisposable {
+export interface IUnitOfWork extends IAsyncDisposable {
     beginAsync(): Promise<string>;
     commitAsync(): Promise<void>;
     rollbackAsync(): Promise<void>;

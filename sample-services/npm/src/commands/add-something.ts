@@ -1,13 +1,19 @@
 import { ICommand } from "../abstractions/command";
 import { CommandHandlerBase } from "../abstractions/command-handler";
 
-export class AddSomethingCommand implements ICommand {
-    static readonly TYPE = "SampleServices.Commands.AddSomethingCommand";
-    type = AddSomethingCommand.TYPE;
+export interface IAddSomethingCommand extends ICommand {
     someNewData: string;
-    constructor() {
+}
+
+export class AddSomethingCommand implements IAddSomethingCommand {
+    static readonly TYPE = "SampleServices.Commands.AddSomethingCommand";
+    readonly type: string;
+    someNewData: string;
+    constructor(state?: Partial<IAddSomethingCommand>) {
         this.someNewData = "default";
+        state && Object.assign(this, JSON.parse(JSON.stringify(state)));
+        this.type = AddSomethingCommand.TYPE;
     }
 }
 
-export interface IAddSomethingHandler extends CommandHandlerBase<AddSomethingCommand, number> { }
+export interface IAddSomethingHandler extends CommandHandlerBase<IAddSomethingCommand, number> { }

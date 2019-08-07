@@ -61,14 +61,12 @@ namespace Sample.API
                             SomeId = firstSomething.SomeId,
                             SomeNewData = firstSomething.SomeData + " | " + DateTime.UtcNow.ToShortTimeString()
                         });
-                        records = await queries.GetSomethingsAsync();
                         
                         // var removeSomethingHandler = app.ApplicationServices.GetRequiredService<IRemoveSomethingHandler>();
                         // await removeSomethingHandler.HandleAsync(new RemoveSomethingCommand
                         // {
                         //     SomeId = firstSomething.SomeId
                         // });
-                        // records = await queries.GetSomethingsAsync();
                     } 
                     else
                     {
@@ -77,8 +75,9 @@ namespace Sample.API
                         {
                             SomeNewData = DateTime.UtcNow.ToShortTimeString()
                         });
-                        records = await queries.GetSomethingsAsync();
                     }
+                    
+                    records = await queries.GetSomethingsAsync();
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(records));
                 
                 }

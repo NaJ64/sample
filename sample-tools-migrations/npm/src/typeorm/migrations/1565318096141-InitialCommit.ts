@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class InitialCommit1565062753022 implements MigrationInterface {
+export class InitialCommit1565318096141 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query(`CREATE TABLE "sample"."parent" ("id" SERIAL NOT NULL, "description" character varying NOT NULL, CONSTRAINT "PK_74d140f36b33ff50562e50a187b" PRIMARY KEY ("id"))`);

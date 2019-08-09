@@ -46,6 +46,7 @@
             "request": "launch",
             "cwd": "${workspaceFolder}/sample-api/npm",
             "program": "${workspaceFolder}/sample-api/npm/dist/index.js",
+            "sourceMaps": false,
         },
         {
             "name": "Node.js Launch (sample-tools-migrations)",

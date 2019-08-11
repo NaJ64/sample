@@ -1,10 +1,11 @@
+import { inject, injectable } from "inversify";
 import { IParentRepository, ISampleUnitOfWork, ISampleUnitOfWorkFactory } from "sample-domain";
 import { Connection, ConnectionOptions } from "typeorm";
+import { TYPES as OrmPersistence } from "../../dependency-injection/types";
 import { TOUnitOfWorkBase, TOUnitOfWorkFactoryBase } from "../abstractions/unit-of-work";
+import { ChildSchema } from "./parent/child-schema";
 import { TOParentRepository } from "./parent/parent-repository";
 import { ParentSchema } from "./parent/parent-schema";
-import { injectable, inject } from "inversify";
-import { TYPES as OrmPersistence } from "../../dependency-injection/types";
 
 export class TOSampleUnitOfWork extends TOUnitOfWorkBase implements ISampleUnitOfWork {
 
@@ -14,7 +15,10 @@ export class TOSampleUnitOfWork extends TOUnitOfWorkBase implements ISampleUnitO
 
     constructor(getConnection: () => Connection) {
         super(getConnection);
-        this.parents = new TOParentRepository(() => this.getRepositoryForSchema(ParentSchema));
+        this.parents = new TOParentRepository(
+            () => this.getRepositoryForSchema(ParentSchema), 
+            () => this.getRepositoryForSchema(ChildSchema)
+        );
     }
 
 }

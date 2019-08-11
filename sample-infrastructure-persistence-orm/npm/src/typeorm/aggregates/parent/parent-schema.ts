@@ -14,7 +14,9 @@ export const ParentSchema = new EntitySchema<Parent>({
         children: {
             type: "one-to-many",
             target: "child",
-            cascade: true
+            inverseSide: "_parent",
+            cascade: true,
+            lazy: false
         }
     }
 });

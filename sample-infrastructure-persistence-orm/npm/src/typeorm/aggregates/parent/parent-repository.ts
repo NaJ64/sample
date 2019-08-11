@@ -33,4 +33,10 @@ export class TOParentRepository extends TORepositoryBase<Parent, IParent> implem
         return insertedParent;
     }
 
+    async updateAsync(id: number, record: Parent): Promise<Parent> {
+        // Make sure all parent ids are set before updating
+        record.children.forEach(x => x.parentId = record.id);
+        return await super.updateAsync(id, record);
+    }
+
 }

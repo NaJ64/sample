@@ -58,9 +58,9 @@
             "args": [
                 "typeorm",
                 "migration:run",
-                // "migration:generate",
-                // "-n",
-                // "InitialCommit"
+                //"migration:generate",
+                //"-n",
+                //"InitialCommit"
             ],
         },
     ]

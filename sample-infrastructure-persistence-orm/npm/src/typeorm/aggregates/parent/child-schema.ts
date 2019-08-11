@@ -18,8 +18,10 @@ export const ChildSchema = new EntitySchema<Child & { _parent: Parent }>({
             type: "many-to-one",
             target: "parent",
             joinColumn: {
+                referencedColumnName: "id",
                 name: "parentId"
             },
+            inverseSide: "children",
             onDelete: "CASCADE",
             onUpdate: "CASCADE"
         }

@@ -16,7 +16,7 @@ export const ParentSchema = new EntitySchema<Parent>({
             target: "child",
             inverseSide: "_parent",
             cascade: true,
-            lazy: false
+            eager: true
         }
     }
 });
